@@ -14,7 +14,7 @@ and open the template in the editor.
         <table>
         <?php
         
-            $rows = array(100);
+            
             $number = 1; 
             for ($i = 0; $i < 100; $i++){
                
