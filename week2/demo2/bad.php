@@ -15,10 +15,7 @@ and open the template in the editor.
     $page->title = "My PHP Page";
     $nav = array('link1','link2','link3');
     $page->setNav($nav);
-    $page->setNav(array('link4','link5','link6'));
-    
-    
-    
+    $page->setNav(array('link4','link5','link6'));        
   
 ?>
 

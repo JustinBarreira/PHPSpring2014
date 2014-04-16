@@ -31,10 +31,8 @@ class Page {
     }
     
     private function isNavSet(){
-       if ( is_array($this->nav) && count($this->nav) ) {
-           return true;
-       }
-       return false;
+       return (is_array($this->nav) && count($this->nav));
+       
     }
 
 
