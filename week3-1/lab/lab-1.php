@@ -66,17 +66,17 @@ Goals:
         
         <h2> My Form Demo </h2>
        <form name="mainform" action="#" method="post">            
-           Email: <input type="text" name="email" class="<?php if ( !empty($_POST)){ if(!empty($email)){} else echo inputerror;}?>" value="<?php if(!empty($_POST))echo $_POST["email"]; ?>"/> <br /> 
+            Email: <input type="text" name="email" class="<?php if ( !empty($_POST)){ if(!empty($email)){} else echo 'inputerror';}?>" value="<?php if(!empty($_POST))echo $_POST["email"]; ?>"/> <br /> 
             <?php 
             if ( !empty($errorMessages["email"]) ) 
                 echo '<p class="error">',$errorMessages["email"], '</p>';
             ?>
-            Username: <input type="text" name="username" class="<?php if ( !empty($_POST)){ if(!empty($email)){} else echo inputerror;}?>" value="<?php if(!empty($_POST))echo $_POST["username"]; ?>" /> <br /> 
+            Username: <input type="text" name="username" class="<?php if ( !empty($_POST)){ if(!empty($username)){} else echo 'inputerror';}?>" value="<?php if(!empty($_POST))echo $_POST["username"]; ?>" /> <br /> 
             <?php 
             if ( !empty($errorMessages["username"]) )
                 echo '<p class="error">',$errorMessages["username"], '</p>';                
             ?>           
-            Password: <input type="password" name="password" class="<?php if ( !empty($_POST)){ if(!empty($email)){} else echo inputerror;}?>" /> <br />
+            Password: <input type="password" name="password" class="<?php if ( !empty($_POST)){ if(!empty($password)){} else echo 'inputerror';}?>" /> <br />
             <?php 
             if ( !empty($errorMessages["password"]) )
                 echo '<p class="error">',$errorMessages["password"], '</p>';                
