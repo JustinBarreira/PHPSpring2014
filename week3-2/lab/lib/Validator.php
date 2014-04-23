@@ -9,12 +9,12 @@
 /**
  * Description of Validator
  *
- * @author bean2_000
+ * @author GFORTI
  */
 class Validator {
     //put your code here
-    
-    /**
+        
+   /**
   * A static method to check if an email is valid.
   *
   * @param string $email must be a valid email
@@ -25,7 +25,8 @@ class Validator {
         return ( is_string($email) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL) != false );
     }
     
-    /**
+    
+     /**
     * A static method to check if a name is valid.
     *
     * @param string $name must be a valid name
@@ -33,8 +34,7 @@ class Validator {
     * @return boolean
     */    
     public static function nameIsValid($name) {
-        
-        return ( is_string($name) && !empty($name));
+        return ( is_string($name) && !empty($name) );       
     }
     
     /**
@@ -46,6 +46,6 @@ class Validator {
     */    
     public static function passwordIsValid($password) {
         
-        return ( is_string($password) && !empty($password));
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-<?php include 'dependency.php' ?>
+<?php include 'dependency.php'; ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -9,25 +9,27 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
+         <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
     </head>
     <body>
         <?php
         // put your code here
-        
-            include('lib/Signup.php');
-            include('lib/Validator.php');
-        
+                
             $signup = new Signup();
             
-            if ($signup->isPostRequest()){
-                $signup->emailEntryIsValid();
-                /*
-                To-Do - Print out error in a list
-                only if there is a count to the array
-                else data must be all valid
-                 */
-                print_r($signup->getErrors());
+            if ( $signup->isPostRequest()  ) {
+                 
+                if ( $signup->entryIsValid() ) {
+                    echo '<div class="success">All fields are good</div>';
+                } else {
+            
+                 //todo print out error in a list
+                 // only if there is a count to the array
+                 // else data must be all valid
+                  print_r($signup->getErrors());
+                }
             }
+          
         ?>
         
         

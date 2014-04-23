@@ -27,13 +27,17 @@ class Signup {
     private $username;
     private $password;
     private $confirmpassword;
-    private $errors = array();
    
-    
-    function __construct() {        
-        $this->email = filter_input(INPUT_POST, 'email');         
+    private $errors = array();
+            
+    function __construct() {
+       
+        $this->email = filter_input(INPUT_POST, 'email');      
         $this->username = filter_input(INPUT_POST, 'username');
-    }   
+        $this->password = filter_input(INPUT_POST, 'password');
+        $this->confirmpassword = filter_input(INPUT_POST, 'confirmpassword');
+    }
+
     
     
     public function getEmail() {
@@ -51,8 +55,8 @@ class Signup {
     public function getConfirmpassword() {
         return $this->confirmpassword;
     }
-
-    /**
+    
+   /**
     * A method to return all errors found in the post
     *
     * @return array
@@ -61,6 +65,8 @@ class Signup {
         return $this->errors;
     }
     
+    
+    
     /**
     * A method to check if a posted email is valid.
     * Adds a custom message to the errors list key["email"]
@@ -68,15 +74,58 @@ class Signup {
     * @return boolean
     */    
     public function emailEntryIsValid() {
+        
+         $email = $this->getEmail();
          
-         if ( empty($this->getEmail()) ) {
+         if ( empty($email) ) {
             $this->errors["email"] = "Email is missing.";
          } else if ( !Validator::emailIsValid($this->getEmail()) ) {
             $this->errors["email"] = "Email is not valid.";                
-         } 
+         }
         
         return ( empty($this->errors["email"]) ? true : false ) ;
     }
+    
+    /**
+    * A method to check if a posted username is valid.
+    * Adds a custom message to the errors list key["username"]
+    *
+    * @return boolean
+    */    
+    public function usernameEntryIsValid() {
+        
+         $username = $this->getUsername();
+         
+         if ( empty($username) ) {
+            $this->errors["username"] = "Username is missing.";
+         } else if ( !Validator::usernameIsValid($this->getUsername()) ) {
+            $this->errors["username"] = "Username is not valid.";                
+         }
+        
+        return ( empty($this->errors["username"]) ? true : false ) ;
+    }
+    
+    /**
+    * A method to check if a posted password is valid.
+    * Adds a custom message to the errors list key["password"]
+    *
+    * @return boolean
+    */    
+    public function passwordEntryIsValid() {
+        
+         //todo put logic here (same as email)
+        // also check if it matches confirmpassword
+        $password = $this->getPassword();
+         
+         if ( empty($password) ) {
+            $this->errors["password"] = "Password is missing.";
+         } else if ( !Validator::passwordIsValid($this->getPassword()) ) {
+            $this->errors["password"] = "Password is not valid.";                
+         }
+         
+        return ( empty($this->errors["password"]) ? true : false ) ;
+    }
+    
     
     /**
     * A static method to check if a Post request has been made.
@@ -87,6 +136,8 @@ class Signup {
         return ( filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST' );
     }
     
+    
+    
     /**
     * A method to check if a posted email is valid.
     * Adds a custom message to the errors list key["email"]
@@ -96,8 +147,9 @@ class Signup {
     public function entryIsValid(){
         $this->emailEntryIsValid();
         $this->usernameEntryIsValid();
-        $this->passwordEntryIsValid();  // 3rd check length
+        $this->passwordEntryIsValid();
         
         return ( count($this->errors) ? false : true );
     }
+    
 }
