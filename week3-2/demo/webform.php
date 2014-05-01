@@ -42,7 +42,7 @@ and open the template in the editor.
            <fieldset>
 		<legend>Sign-up Form:</legend>
                 <label for="email">E-mail:</label> 
-                <input id="email" type="text" name="email" value="<?php echo $signup->email; ?>" /> <br />
+                <input id="email" type="text" name="email" value="<?php echo $signup->email ?>" /> <br />
                 <?php echo Util::getErrorMessageHTML('email', $errors); ?>
                 
                 <label for="username">Username:</label>

@@ -14,6 +14,8 @@ and open the template in the editor.
         <?php
         // put your code here
         
+        $signup = new Signup();
+        
         $state_list = array('AL'=>"Alabama",  
 			'AK'=>"Alaska",  
 			'AZ'=>"Arizona",  
