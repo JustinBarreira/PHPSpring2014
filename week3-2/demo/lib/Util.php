@@ -24,6 +24,15 @@ class Util {
     }
     
     /**
+    * A static method to check if a Get request has been made.
+    *    
+    * @return boolean
+    */    
+    public static function isGetRequest() {
+        return ( filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'GET' );
+    }
+    
+    /**
     * A static method to create a error message template in HTML.
     *   
     * @param string $key must be a valid array key 

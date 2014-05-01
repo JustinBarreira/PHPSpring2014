@@ -17,6 +17,26 @@ and open the template in the editor.
                 
             $signup = new Signup();
             
+            /*
+             * $errors = array();
+        if ( Util::isPostRequest() ){
+            
+            if ( $signup->entryIsValid() ) {
+                echo '<p class="success">Data would be process and a sucess message is displayed</p>';
+            } else {
+                $errors = $signup->getErrors();
+            }
+        }
+        
+            if ( count($errors) ) {
+                echo '<ul class="error">';
+                foreach ($errors as $value) {
+                    echo '<li>',$value,'</li>';
+                }
+                echo '</ul>';
+            }
+             */
+            
             if ( $signup->isPostRequest()  ) {
                  
                 if ( $signup->entryIsValid() ) {
@@ -28,6 +48,14 @@ and open the template in the editor.
                  // else data must be all valid
                   print_r($signup->getErrors());
                 }
+            }
+            
+            if ( count($errors) ) {
+                echo '<ul class="error">';
+                foreach ($errors as $value) {
+                    echo '<li>',$value,'</li>';
+                }
+                echo '</ul>';
             }
           
         ?>
@@ -45,7 +73,7 @@ and open the template in the editor.
                 
                 
                 <label for="password">Password:</label>
-                <input id="password" type="password" name="password" /> <br />           
+                <input id="password" type="password" name="password" value="<?php echo $signup->getPassword(); ?>"  /> <br />           
             
                 
                 <label for="confirmpassword">Confirm Password:</label>

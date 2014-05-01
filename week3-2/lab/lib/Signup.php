@@ -16,7 +16,7 @@ class Signup {
     
     /*
      * Todo -   Store the POST values into a variable and 
-     * Todo - output non-password fields back into the input value
+     * Todo -   output non-password fields back into the input value
      * Todo -   Validation for all input fields
      * Todo -   show message if there is an error other wise notify the 
      *          user that all the data submited is correct

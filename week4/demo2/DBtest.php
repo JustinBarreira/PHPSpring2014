@@ -15,13 +15,12 @@
        $dbs->execute();
        $results = $dbs->fetchAll(PDO::FETCH_ASSOC);
        
-       echo '<table border="1">';
+       echo '<table border="1">'; 
        echo '<tr><th>Index</th><th>ID</th><th>Email</th>';
-       echo '<th>username</th><td>password</th></tr>';
-       
-       echo '<table>';       
-       foreach ($results as $value) {
+       echo '<th>username</th><th>password</th></tr>';
+       foreach ($results as $key => $value) {
            echo '<tr>';
+            echo '<td>', $key ,'</td>';
             echo '<td>', $value['id'] ,'</td>';
             echo '<td>', $value['email'] ,'</td>';
             echo '<td>', $value['username'] ,'</td>';
@@ -31,7 +30,7 @@
        echo '</table>';
        
        
-          print_r($results);      
+         // print_r($results);      
           /*      
                 
                  if ( NULL != $db ) {

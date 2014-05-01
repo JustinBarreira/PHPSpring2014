@@ -53,7 +53,13 @@ class Signup {
     */    
     public function usernameEntryIsValid() {
                 
-        return true ;
+        if ( empty($this->username) ) {
+            $this->errors["username"] = "Username is missing.";
+         } else if ( !Validator::usernameIsValid($this->username) ) {
+            $this->errors["username"] = "Username is not valid.";                
+         } 
+        
+        return ( empty($this->errors["username"]) ? true : false ) ;
     }
     
     /**
@@ -64,7 +70,13 @@ class Signup {
     */    
     public function passwordEntryIsValid() {
                 
-        return true ;
+        if ( empty($this->password) ) {
+            $this->errors["password"] = "Password is missing.";
+         } else if ( !Validator::passwordIsValid($this->password) ) {
+            $this->errors["password"] = "Password is not valid.";                
+         } 
+        
+        return ( empty($this->errors["password"]) ? true : false ) ;
     }
     
     /**
@@ -75,7 +87,15 @@ class Signup {
     */    
     public function ComfirmPasswordEntryIsValid() {
                 
-        return true ;
+        if /*( empty($this->confirmPassword) ) {
+            $this->errors["confirmPassword"] = "Password is missing.";
+         } else if ( !Validator::passwordIsValid($this->confirmPassword) ) {
+            $this->errors["confirmPassword"] = "Password is not valid.";                
+         } else if */($this->confirmPassword != $this->password) {
+            $this->errors["confirmPassword"] = "Passwords do not match.";
+         }
+        
+        return ( empty($this->errors["confirmPassword"]) ? true : false ) ;
     }
     
     /**
