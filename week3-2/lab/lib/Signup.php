@@ -116,6 +116,7 @@ class Signup {
          //todo put logic here (same as email)
         // also check if it matches confirmpassword
         $password = $this->getPassword();
+        $confirmpassword = $this->getConfirmpassword();
          
          if ( empty($password) ) {
             $this->errors["password"] = "Password is missing.";
@@ -123,7 +124,16 @@ class Signup {
             $this->errors["password"] = "Password is not valid.";                
          }
          
-        return ( empty($this->errors["password"]) ? true : false ) ;
+         if ( empty($confirmpassword) ) {
+            $this->errors["confirmpassword"] = "Confirm Password is missing.";
+         } else if ( !Validator::passwordIsValid($this->getConfirmpassword()) ) {
+            $this->errors["confirmpassword"] = "Confirm Password is not valid.";                
+         }
+         
+         if ($password != $confirmpassword) {
+             $this->errors["confirmpassword"] = "Confirm Password does not match.";
+         }         
+            return ( empty($this->errors["password"]) ? true : false ) ;
     }
     
     

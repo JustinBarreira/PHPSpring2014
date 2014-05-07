@@ -1,10 +1,6 @@
 <?php include 'dependency.php'; ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -15,27 +11,17 @@ and open the template in the editor.
         <?php
         // put your code here
                 
-            $signup = new Signup();
-            
-            /*
-             * $errors = array();
-        if ( Util::isPostRequest() ){
-            
-            if ( $signup->entryIsValid() ) {
-                echo '<p class="success">Data would be process and a sucess message is displayed</p>';
-            } else {
-                $errors = $signup->getErrors();
-            }
-        }
-        
-            if ( count($errors) ) {
-                echo '<ul class="error">';
-                foreach ($errors as $value) {
-                    echo '<li>',$value,'</li>';
+            $signup = new Signup();            
+            $errors = array();
+            if ( Util::isPostRequest() ){
+
+                if ( $signup->entryIsValid() ) {
+                    echo '<p class="success">Data would be process and a sucess message is displayed</p>';
+                } else {
+                    $errors = $signup->getErrors();
                 }
-                echo '</ul>';
+
             }
-             */
             
             if ( $signup->isPostRequest()  ) {
                  
@@ -46,7 +32,6 @@ and open the template in the editor.
                  //todo print out error in a list
                  // only if there is a count to the array
                  // else data must be all valid
-                  print_r($signup->getErrors());
                 }
             }
             
@@ -73,7 +58,7 @@ and open the template in the editor.
                 
                 
                 <label for="password">Password:</label>
-                <input id="password" type="password" name="password" value="<?php echo $signup->getPassword(); ?>"  /> <br />           
+                <input id="password" type="password" name="password" /> <br />           
             
                 
                 <label for="confirmpassword">Confirm Password:</label>

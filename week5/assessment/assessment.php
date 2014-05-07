@@ -110,7 +110,7 @@ and open the template in the editor.
                 </textarea><br />
                 
                 <label for="display">Display:</label>
-                <textarea id="display" type="text" name="display" rows="10" cols="50"/>
+                <textarea id="display" type="text" name="display" rows="10" cols="50" readonly/>
                     <?php 
                         echo $signup->fullname, "\n\n",
                              $signup->state, "\n\n",

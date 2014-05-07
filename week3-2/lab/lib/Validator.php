@@ -33,7 +33,7 @@ class Validator {
     *
     * @return boolean
     */    
-    public static function nameIsValid($name) {
+    public static function usernameIsValid($name) {
         return ( is_string($name) && !empty($name) );       
     }
     
@@ -46,6 +46,6 @@ class Validator {
     */    
     public static function passwordIsValid($password) {
         
-        return ( is_string($password) && !empty($password) );
+        return ( is_string($password) && !empty($password) && strlen($password) >= 6);
     }
 }
