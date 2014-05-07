@@ -121,13 +121,13 @@ class Signup {
          if ( empty($password) ) {
             $this->errors["password"] = "Password is missing.";
          } else if ( !Validator::passwordIsValid($this->getPassword()) ) {
-            $this->errors["password"] = "Password is not valid.";                
+            $this->errors["password"] = "Password is not valid. Password must be at least 6 characters long";                
          }
          
          if ( empty($confirmpassword) ) {
             $this->errors["confirmpassword"] = "Confirm Password is missing.";
          } else if ( !Validator::passwordIsValid($this->getConfirmpassword()) ) {
-            $this->errors["confirmpassword"] = "Confirm Password is not valid.";                
+            $this->errors["confirmpassword"] = "Confirm Password is not valid. Confirm Password must be at least 6 characters long";                
          }
          
          if ($password != $confirmpassword) {
