@@ -1,3 +1,4 @@
+<?php include 'dependency.php'; ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -13,77 +14,112 @@ and open the template in the editor.
     <body>
         <?php
         // put your code here
+        
         $signup = new Signup();
-             
-       // print_r($_SERVER); 
         
-        $errors = array();
-        if ( Util::isPostRequest() ){
-            
-            if ( $signup->entryIsValid() ) {
-                echo '<p class="success">Data would be process and a sucess message is displayed</p>';
-            } else {
-                $errors = $signup->getErrors();
-            }
-        }
+        $state_list = array('AL'=>"Alabama",  
+			'AK'=>"Alaska",  
+			'AZ'=>"Arizona",  
+			'AR'=>"Arkansas",  
+			'CA'=>"California",  
+			'CO'=>"Colorado",  
+			'CT'=>"Connecticut",  
+			'DE'=>"Delaware",  
+			'DC'=>"District Of Columbia",  
+			'FL'=>"Florida",  
+			'GA'=>"Georgia",  
+			'HI'=>"Hawaii",  
+			'ID'=>"Idaho",  
+			'IL'=>"Illinois",  
+			'IN'=>"Indiana",  
+			'IA'=>"Iowa",  
+			'KS'=>"Kansas",  
+			'KY'=>"Kentucky",  
+			'LA'=>"Louisiana",  
+			'ME'=>"Maine",  
+			'MD'=>"Maryland",  
+			'MA'=>"Massachusetts",  
+			'MI'=>"Michigan",  
+			'MN'=>"Minnesota",  
+			'MS'=>"Mississippi",  
+			'MO'=>"Missouri",  
+			'MT'=>"Montana",
+			'NE'=>"Nebraska",
+			'NV'=>"Nevada",
+			'NH'=>"New Hampshire",
+			'NJ'=>"New Jersey",
+			'NM'=>"New Mexico",
+			'NY'=>"New York",
+			'NC'=>"North Carolina",
+			'ND'=>"North Dakota",
+			'OH'=>"Ohio",  
+			'OK'=>"Oklahoma",  
+			'OR'=>"Oregon",  
+			'PA'=>"Pennsylvania",  
+			'RI'=>"Rhode Island",  
+			'SC'=>"South Carolina",  
+			'SD'=>"South Dakota",
+			'TN'=>"Tennessee",  
+			'TX'=>"Texas",  
+			'UT'=>"Utah",  
+			'VT'=>"Vermont",  
+			'VA'=>"Virginia",  
+			'WA'=>"Washington",  
+			'WV'=>"West Virginia",  
+			'WI'=>"Wisconsin",  
+			'WY'=>"Wyoming");
         
-            if (count($errors) ) {
-                echo '<ul class="error">';
-                foreach ($errors as $value) {
-                    echo '<li>',$value,'</li>';
-                }
-                echo '</ul>';
-        }      
-                
                         class Signup {                            
                         
                         public $fullname;
                         public $state;
                         public $comments;
+                        public $date;
 
                         public function __construct() {
                             $this->fullname = filter_input(INPUT_POST, 'fullname');
                             $this->state = filter_input(INPUT_POST, 'state');
-                            $this->comments = filter_input(INPUT_POST, 'comments');      
+                            $this->comments = filter_input(INPUT_POST, 'comments');
                         }
                         }
         ?>
         
         <form name="mainform" action="#" method="post"> 
            <fieldset>
-		<legend>Comment Form:</legend>
+		<legend>Comments Form:</legend>
                 <label for="fullname">Full Name:</label> 
                 <input id="fullname" type="text" name="fullname" /> <br />
                 
                 <label for="state">State:</label>
                 <select id="state" name="state">
-                    <?php
+                    <?php 
                     
+                    if (count($state_list) ) {
                         foreach ($state_list as $value) {
                             echo '<option>',$value,'</option>';
-                        }                            
+                        }
+                    }
+                            
                     ?>
                 </select><br /> 
                 <label for="comments">Comments:</label>
                 <textarea id="comments" type="text" name="comments" rows="4" cols="50">
                 </textarea><br />
                 
-                <div class="Preview" hidden="true">
-                <h1 class="preview" for="display">Preview</h1>
+                <label for="display">Display:</label>
+                <textarea id="display" type="text" name="display" rows="10" cols="50" readonly/>
                     <?php 
-                        echo "<h3> First Name: $signup->fullname <br />",
-                             "State: $signup->state <br />",
-                             'Posted On: <br />',   
-                             "Comments: $signup->comments <br /></h3>";
-                                 
-                             /*'<h2>',"First Name: ", $signup->fullname, "\n",
-                             "State: ", $signup->state, "\n\n",
-                             "Posted On: ", DateTime::RFC1036, "\n\n",
-                             "Comments: ", $signup->comments, '</h2>';*/
+                        if ( Util::isPostRequest() ) {
+                            echo $signup->fullname, "\n\n",
+                                 $signup->state, "\n\n",
+                                 $signup->comments, "\n\n",
+                                 date('l F jS\, Y h:i A');
+                        }
+                                
                     ?>
-                </div>
-                
-                <input type="submit" value="Submit"/>
+                </textarea>
+
+                <input type="submit" value="Submit" />
             </fieldset>
         </form>
     </body>
