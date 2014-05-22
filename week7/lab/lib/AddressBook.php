@@ -19,10 +19,43 @@ class AddressBook extends DB {
         $this->setDb();
     }
     
-    public function create() {
+    /**
+    * A public method to create a new entry into the addressbook
+    * database.
+    *
+    * @param object $AddressbookModel must be an instanceof AddressbookModel
+    *
+    * @return boolean
+    */  
+    public function create($AddressbookModel) {
+        $result = false;
         
+        //INSERT INTO LARGE_SLIP VALUES
+         if ( null !== $this->getDB() && $AddressbookModel instanceof AddressbookModel) {
+            $dbs = $this->getDB()->prepare('insert into addressbook set address = :address, city = :city, state = :state, zip = :zip, name = :name');
+            $dbs->bindParam(':address', $AddressbookModel->address, PDO::PARAM_STR);
+            $dbs->bindParam(':city', $AddressbookModel->city, PDO::PARAM_STR);
+            $dbs->bindParam(':state', $AddressbookModel->state, PDO::PARAM_STR);
+            $dbs->bindParam(':zip', $AddressbookModel->zip, PDO::PARAM_STR);
+            $dbs->bindParam(':name', $AddressbookModel->name, PDO::PARAM_STR);
+            
+            if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+                $result = true;
+            }
+        
+         }   
+        
+        return $result;
     }
     
+    /**
+    * A public method to update an entry in the addressbook
+    * database.
+    *
+    * @param object $AddressbookModel must be an instanceof AddressbookModel
+    *
+    * @return boolean
+    */
     public function update($AddressbookModel) {
         $result = false;
         
@@ -45,6 +78,14 @@ class AddressBook extends DB {
         return $result;
     }
     
+    /**
+    * A public method to return an entry in the addressbook
+    * database.
+    *
+    * @param int $id 
+    *
+    * @return int
+    */
     public function read($id = 0) {
        if ($id !== 0) {
            return $this->readByID($id);
@@ -70,6 +111,11 @@ class AddressBook extends DB {
            return $results;
      }
     
+     /**
+    * A private method to return an array from the database
+    *
+    * @return array
+    */
     private function readAll(){
          $results = array();
         
@@ -84,11 +130,28 @@ class AddressBook extends DB {
         return $results;
     }
 
-
-
+    
+    /*
+     * A public method to delete a database entry
+     * 
+     * @return boolean
+     * 
+     */
 
     public function delete() {
+        $result = false;
         
+        
+         if ( null !== $this->getDB()) {
+            $dbs = $this->getDB()->prepare('delete from addressbook where id = :id');          
+            
+            if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+                $result = true;
+            }
+        
+         }   
+        
+        return $result;
     }
 
 }

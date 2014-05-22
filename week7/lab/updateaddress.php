@@ -11,8 +11,13 @@
         
         Util::confirmAccess();
       
+            echo '<table border="2">';     
+            echo '<td><form name="mainform" action="index.php"><input type="submit" value="Login" /></form> </td>';
+            echo '<td><form name="mainform" action="viewaddress.php"><input type="submit" value="View Address" /></form> </td>';
         
          $address = new AddressBook();
+         
+         $state_list = States::getStates();
          
          
          if ( Util::isPostRequest() ) {
@@ -51,7 +56,19 @@
                 <input id="city" type="text" name="city" value="<?php echo $addressResult['city']; ?>" /> <br />
                
                 <label for="state">State:</label> 
-                <input id="state" type="text" name="state" value="<?php echo $addressResult['state']; ?>" /> <br />
+                <select id="state" type="text" name="state">
+                    <?php 
+                    
+                    
+                    if (count($state_list) ) {                        
+                        echo '<option>',$addressResult['state'],'</option>';
+                        
+                        foreach ($state_list as $value) {                            
+                            echo '<option>',$value,'</option>';
+                        }
+                    }
+                            
+                    ?>"> </select><br />
                               
                 <label for="zip">ZIP:</label> 
                 <input id="zip" type="text" name="zip" value="<?php echo $addressResult['zip']; ?>" /> <br />
