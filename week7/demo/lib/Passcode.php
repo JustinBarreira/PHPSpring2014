@@ -32,7 +32,4 @@ class Passcode {
         // shortcut for if else checks to see if true (else) : false
         return ( $this->getPasscode() === Config::PASS_CODE ? true : false );
     }
-
-
-
 }

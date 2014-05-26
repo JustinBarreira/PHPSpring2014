@@ -95,6 +95,11 @@ class AddressBook extends DB {
         
     }
     
+    /**
+    * A private method to return a record from the database by the id
+    *
+    * @return array
+    */
      private function readByID($id){
            $results = array();
            
@@ -111,8 +116,8 @@ class AddressBook extends DB {
            return $results;
      }
     
-     /**
-    * A private method to return an array from the database
+    /**
+    * A private method to return an array of all the records from the database
     *
     * @return array
     */
@@ -148,7 +153,6 @@ class AddressBook extends DB {
             if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
                 $result = true;
             }
-        
          }   
         
         return $result;
