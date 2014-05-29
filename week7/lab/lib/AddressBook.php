@@ -60,7 +60,7 @@ class AddressBook extends DB {
         $result = false;
         
         
-         if ( null !== $this->getDB() && $AddressbookModel instanceof AddressbookModel) {
+         if ( null !== $this->getDB() && $AddressbookModel instanceof AddressbookModel ) {
             $dbs = $this->getDB()->prepare('update addressbook set address = :address, city = :city, state = :state, zip = :zip, name = :name where id = :id');
             $dbs->bindParam(':id', $AddressbookModel->id, PDO::PARAM_INT);
             $dbs->bindParam(':address', $AddressbookModel->address, PDO::PARAM_STR);
@@ -84,7 +84,7 @@ class AddressBook extends DB {
     *
     * @param int $id 
     *
-    * @return int
+    * @return array
     */
     public function read($id = 0) {
        if ($id !== 0) {
@@ -143,12 +143,12 @@ class AddressBook extends DB {
      * 
      */
 
-    public function delete() {
-        $result = false;
+    public function delete($AddressbookModel) {
+        $result = false;        
         
-        
-         if ( null !== $this->getDB()) {
-            $dbs = $this->getDB()->prepare('delete from addressbook where id = :id');          
+         if ( null !== $this->getDB() && $AddressbookModel instanceof AddressbookModel ) {
+            $dbs = $this->getDB()->prepare('delete from addressbook where id = :id'); 
+            $dbs->bindParam(':id', $AddressbookModel->id, PDO::PARAM_INT);
             
             if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
                 $result = true;

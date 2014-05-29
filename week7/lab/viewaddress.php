@@ -49,7 +49,7 @@ and open the template in the editor.
             }            
             echo '</table>';
             
-            echo '<form name="mainform" action="createaddress.php" method="get"><input name="id" type="hidden" value="', $value['id'] ,'" /><input type="submit" value="Create" /></form>';
+            echo '<form action="createaddress.php" method="get"><input type="submit" value="Create" /></form>';
         ?>
         
         

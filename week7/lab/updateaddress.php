@@ -61,10 +61,16 @@
                     
                     
                     if (count($state_list) ) {                        
-                        echo '<option>',$addressResult['state'],'</option>';
                         
-                        foreach ($state_list as $value) {                            
-                            echo '<option>',$value,'</option>';
+                        foreach ($state_list as $key=>$value) {                            
+                           if ($addressResult['state'] == $key)
+                           {
+                               echo '<option selected="selected" value="',$key,'">',$value,'</option>';
+                           }
+                           else
+                           {
+                               echo '<option value="',$key,'">',$value,'</option>';
+                           }
                         }
                     }
                             

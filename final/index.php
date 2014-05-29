@@ -1,9 +1,5 @@
+<?php include 'dependency.php'; ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -11,6 +7,28 @@ and open the template in the editor.
          <link rel="stylesheet" type="text/css" href="css/admin.css" />
     </head>
     <body>
+        
+        <?php
+        // put your code here
+            $msg = '';
+            if ( ! isset($_SESSION['validcode']) ) {
+                $_SESSION['validcode'] = false;
+            }
+            if ( Util::isPostRequest() ) {
+                $checkcode = new Passcode();
+
+                if ( $checkcode->isValidPassword() ) {
+                    $_SESSION['validcode'] = true;
+                    Util::redirect('admin');                   
+                } else {                    
+                    $msg = 'Password is not valid.';
+                }
+            }
+
+            if ( !empty($msg)) {
+                echo '<p>', $msg, '</p>';
+            }
+        ?>
                 
         <h1 id="logo"><span>&#x2728;</span>SaaS Project</h1>
         

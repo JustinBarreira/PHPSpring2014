@@ -31,15 +31,8 @@
                    echo var_dump($AddressbookModel);
               }
           }         
-         
-         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-         
-         $addressResult = $address->read($id);
-          //print_r($addressResult);
           
-         if ( !is_array($addressResult) || count($addressResult) <= 0 ) {
-             Util::redirect('viewaddress');
-         }
+          //print_r($addressResult);
          
         ?>
         
@@ -57,11 +50,12 @@
                     <?php 
                     
                     
-                    if (count($state_list) ) {                        
-                        echo '<option>','</option>';
+                    if (count($state_list) ) {       
                         
-                        foreach ($state_list as $value) {                            
-                            echo '<option>',$value,'</option>';
+                        foreach ($state_list as $key=>$value) {                            
+                           
+                            echo '<option value="',$key,'">',$value,'</option>';
+                           
                         }
                     }
                             
@@ -72,6 +66,7 @@
                 
                 <label for="name">Name:</label> 
                 <input id="name" type="text" name="name" value="" /> <br />
+                <input type="submit" value="Submit" />
             </fieldset>
         </form>
         

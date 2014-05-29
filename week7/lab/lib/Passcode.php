@@ -14,13 +14,18 @@ class Passcode {
     
     /*
      * A public function to get the passcode 
+     * 
+     * @return string
      */
+    
     public function getPasscode() {
         return $this->passcode;
     }
     
     /*
      * A public function to set the passcode
+     * 
+     * @return void
      */
     public function setPasscode($passcode) {
         $this->passcode = $passcode;
