@@ -1,18 +1,30 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Validator
- *
- * @author GFORTI
- */
-class Validator {
+class Validator extends DB {
     //put your code here
+    
+    function __construct() {
+        $this->setDb();
+    }
+
+    public function usernameTaken( UsernameModel $usernameModel) {
+        
+        $username = $usernameModel->getUsername();
+        $isTaken = false;
+        
+            if ( null !== $this->getDB() ) {
+
+                $dbs = $this->getDB()->prepare('select username from signup where username = :username limit 1');
+                $dbs->bindParam(':username', $username, PDO::PARAM_STR);
+
+                if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+                    $isTaken = true;
+                } 
+
+             }
+         
+         return $isTaken;
+    }
         
    /**
   * A static method to check if an email is valid.
@@ -47,5 +59,30 @@ class Validator {
     public static function commentIsValid($comment) {
         return ( is_string($comment) && !empty($comment) && strlen($comment) <= 150 );    
        
+    }   
+
+    /*
+    * A public function to check if the passcode is valid
+    * 
+    * @return boolean
+    */
+    public function isValidLogin( UsersModel $loginModel ){
+        // shortcut for if else checks to see if true (else) : false
+        $username = $loginModel->getUsername();
+        $password = $loginModel->getPassword();
+        $isValid = false;
+        
+            if ( null !== $this->getDB() ) {
+
+                $dbs = $this->getDB()->prepare('select username, password from signup where username = :username limit 1');
+                $dbs->bindParam(':username', $username, PDO::PARAM_STR);
+
+                if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+                    $isTaken = true;
+                } 
+
+             }
+         
+         return $isTaken;
     }
 }

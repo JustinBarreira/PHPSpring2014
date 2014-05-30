@@ -11,14 +11,14 @@
         <?php
         // put your code here
             $msg = '';
-            if ( ! isset($_SESSION['validcode']) ) {
-                $_SESSION['validcode'] = false;
+            if ( ! isset($_SESSION['login']) ) {
+                $_SESSION['login'] = false;
             }
             if ( Util::isPostRequest() ) {
                 $checkcode = new Passcode();
 
                 if ( $checkcode->isValidPassword() ) {
-                    $_SESSION['validcode'] = true;
+                    $_SESSION['login'] = true;
                     Util::redirect('admin');                   
                 } else {                    
                     $msg = 'Password is not valid.';

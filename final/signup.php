@@ -17,16 +17,14 @@ and open the template in the editor.
         
         <fieldset>
             <legend>Signup</legend>
-        <p> Already a member, <a href="login.php">Login</a></p>
-         <form name="mainform" action="#" method="post">
-            
+        <p> Already a member, <a href="index.php">Login</a></p>
+         <form name="mainform" action="#" method="post">            
              
-                         <label>Web Site:</label> <input type="text" name="website" maxlength="30" /> <br />
-             
+                         <label>Web Site:</label> <input type="text" name="website" maxlength="30" /> <br />             
             
-                          <label>Email:</label> <input type="text" name="email" /> <br />
+                         <label>Email:</label> <input type="text" name="email" /> <br />
             
-                          <label>Password:</label> <input type="password" name="password" /> <br />
+                         <label>Password:</label> <input type="password" name="password" /> <br />
                
             <input type="submit" value="Submit" />
                         

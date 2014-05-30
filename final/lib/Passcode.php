@@ -41,14 +41,4 @@ class Passcode {
     public function setEmail($email) {
         $this->email = $email;
     }
-
-        /*
-     * A public function to check if the passcode is valid
-     * 
-     * @return boolean
-     */
-    public function isValidPassword(){
-        // shortcut for if else checks to see if true (else) : false
-        return ( $this->getPassword() === Config::PASS_CODE ? true : false );
-    }
 }
