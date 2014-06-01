@@ -7,15 +7,15 @@ class Validator extends DB {
         $this->setDb();
     }
 
-    public function usernameTaken( UsernameModel $usernameModel) {
+    public function websiteTaken(UsersModel $usersModel) {
         
-        $username = $usernameModel->getUsername();
+        $website = $usersModel->getWebsite();
         $isTaken = false;
         
             if ( null !== $this->getDB() ) {
 
-                $dbs = $this->getDB()->prepare('select username from signup where username = :username limit 1');
-                $dbs->bindParam(':username', $username, PDO::PARAM_STR);
+                $dbs = $this->getDB()->prepare('select website from users where website = :website limit 1');
+                $dbs->bindParam(':website', $website, PDO::PARAM_STR);
 
                 if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
                     $isTaken = true;
@@ -66,7 +66,7 @@ class Validator extends DB {
     * 
     * @return boolean
     */
-    public function isValidLogin( UsersModel $loginModel ){
+    public function isValidLogin(Passcode $loginModel ){
         // shortcut for if else checks to see if true (else) : false
         $username = $loginModel->getUsername();
         $password = $loginModel->getPassword();
@@ -74,15 +74,16 @@ class Validator extends DB {
         
             if ( null !== $this->getDB() ) {
 
-                $dbs = $this->getDB()->prepare('select username, password from signup where username = :username limit 1');
+                $dbs = $this->getDB()->prepare('select username, password from signup where username = :username AND password = :password limit 1');
                 $dbs->bindParam(':username', $username, PDO::PARAM_STR);
+                $dbs->bindParam(':password', $password, PDO::PARAM_STR);
 
                 if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-                    $isTaken = true;
+                    $isValid = true;
                 } 
 
              }
          
-         return $isTaken;
+         return $isValid;
     }
 }

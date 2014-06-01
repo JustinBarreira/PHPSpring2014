@@ -1,20 +1,40 @@
 <?php
-/**
- * Description of LoginModel
- *
- * @author bean2_000
- */
+
 class UsersModel {
     //put your code here
     
-    private $userid;
-    private $website;
-    private $email;
-    private $password;    
-    private $active;
+    public $website;
+    public $email;
+    public $password;
     
-    public function getUserid() {
-        return $this->userid;
+    function __construct($paramArr) {        
+        $this->map($paramArr);
+    }
+    
+    /**
+    * A public method to map all the variables to a value
+    *
+    * @param Array $paramArr
+    *
+    * @return Void
+    */ 
+    public function map($paramArr) {
+        
+        if ( ! is_array($paramArr) ) {
+            return false;
+        }
+        
+        if ( array_key_exists('website', $paramArr) ) {
+            $this->setAddress($paramArr['website']);
+        }
+        if ( array_key_exists('email', $paramArr) ) {
+            $this->setCity($paramArr['email']);
+        }
+        if ( array_key_exists('password', $paramArr) ) {
+            $this->setState($paramArr['password']);
+        }
+        
+        
     }
 
     public function getWebsite() {
@@ -29,16 +49,11 @@ class UsersModel {
         return $this->password;
     }
 
-    public function getActive() {
-        return $this->active;
-    }
-
-    public function setUserid($userid) {
-        $this->userid = $userid;
-    }
-
     public function setWebsite($website) {
-        $this->website = $website;
+        if (is_string($website) && !empty($website) )
+        {
+            $this->website = $website;
+        }
     }
 
     public function setEmail($email) {    //Find RegEx
@@ -54,12 +69,4 @@ class UsersModel {
             $this->password = $password;
         }
     }
-
-    public function setActive($active) {
-        $this->active = $active;
-    }
-
-
-
-
 }

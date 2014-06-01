@@ -20,16 +20,21 @@ and open the template in the editor.
         <p> Already a member, <a href="index.php">Login</a></p>
          <form name="mainform" action="#" method="post">            
              
-                         <label>Web Site:</label> <input type="text" name="website" maxlength="30" /> <br />             
+                         <label for="website">Web Site:</label>
+                         <input id="website" type="text" name="website" maxlength="30" value="" /> <span class="websitetaken">Span</span> <br />             
             
-                         <label>Email:</label> <input type="text" name="email" /> <br />
+                         <label for="email">Email:</label>
+                         <input id="email" type="text" name="email" /> <br />
             
-                         <label>Password:</label> <input type="password" name="password" /> <br />
+                         <label for="password">Password:</label>
+                         <input id="password" type="password" name="password" /> <br />
                
             <input type="submit" value="Submit" />
                         
-        </form>
-        </fieldset>
+         </form>        
+         </fieldset>        
+        
+        <script src="js/script.js" type="text/javascript"></script>        
     </body>
 </html>
 
