@@ -7,9 +7,6 @@
     </head>
     <body>
         <?php
-        // put your code here
-        
-        Util::confirmAccess();
          
             echo '<table border="2">';     
             echo '<td><form name="mainform" action="index.php"><input type="submit" value="Login" /></form> </td>';
