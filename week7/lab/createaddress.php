@@ -23,6 +23,7 @@
               
               if ( $address->create($AddressbookModel) ) {
                   echo '<p>Address created</p>';
+                  echo var_dump($AddressbookModel);
               } else {
                    echo '<p>Address Could not be created</p>';
                    echo var_dump($AddressbookModel);

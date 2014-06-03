@@ -8,7 +8,7 @@ $checkWebsite = array( "taken" => 'Available', "website" => $websiteRequest->get
 
 $signup = new Signup();
 
-if ( Validator::websiteTaken($websiteRequest) )
+if ( $signup->websiteTaken($websiteRequest) )
 {
     $checkWebsite["taken"] = 'Unavailable';
 }

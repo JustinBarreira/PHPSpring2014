@@ -7,24 +7,7 @@ class Validator extends DB {
         $this->setDb();
     }
 
-    public function websiteTaken(UsersModel $usersModel) {
-        
-        $website = $usersModel->getWebsite();
-        $isTaken = false;
-        
-            if ( null !== $this->getDB() ) {
-
-                $dbs = $this->getDB()->prepare('select website from users where website = :website limit 1');
-                $dbs->bindParam(':website', $website, PDO::PARAM_STR);
-
-                if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-                    $isTaken = true;
-                } 
-
-             }
-         
-         return $isTaken;
-    }
+    
         
    /**
   * A static method to check if an email is valid.

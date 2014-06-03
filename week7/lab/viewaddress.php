@@ -34,8 +34,7 @@ and open the template in the editor.
             echo '<th>City</th><th>State</th><th>ZIP</th><th>name</th><th>Command</th></tr>';
             foreach ($addressResults as $key => $value) {
                 echo '<tr>';
-                 echo '<td>', $key ,'</td>';
-                 
+                 echo '<td>', $key ,'</td>';                 
                  echo '<td>', $value['address'] ,'</td>';
                  echo '<td>', $value['city'] ,'</td>';
                  echo '<td>', $value['state'] ,'</td>';          

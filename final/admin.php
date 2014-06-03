@@ -12,11 +12,22 @@ and open the template in the editor.
     </head>
     <body>
                  
+        <?php 
+            
+            if(isset(Util::isPostRequest())) {
+               
+                session_destroy();
+                header('Location: login.php'); //Dont forget to redirect
+                exit;
+            }
+
+        ?>
+        
         <h1 id="logo"><span>&#x2728;</span>SaaS Project</h1>
         
         <div id="corner"><a href="?logout=1">Logout</a></div>
         
-         <fieldset>
+        <fieldset>
         
         <legend> Edit your Page</legend>
                 

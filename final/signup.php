@@ -1,9 +1,5 @@
+<?php include 'dependency.php'; ?>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="UTF-8">
@@ -11,6 +7,24 @@ and open the template in the editor.
          <link rel="stylesheet" type="text/css" href="css/admin.css" />
     </head>
     <body>
+        
+        <?php 
+        
+        $signup = new Signup();  
+         
+         if ( Util::isPostRequest() ) {
+             
+              $UsersModel = new UsersModel(filter_input_array(INPUT_POST));
+              
+              if ( $signup->create($UsersModel) ) {
+                  Util::redirect('admin');
+              } else {
+                   echo '<p>User could not be created</p>';
+              }
+          }
+        
+        
+        ?>
                 
         
         <h1 id="logo"><span>&#x2728;</span>SaaS Project</h1>
@@ -24,10 +38,10 @@ and open the template in the editor.
                          <input id="website" type="text" name="website" maxlength="30" value="" /> <span class="websitetaken">Span</span> <br />             
             
                          <label for="email">Email:</label>
-                         <input id="email" type="text" name="email" /> <br />
+                         <input id="email" type="text" name="email" /> <span class="email"></span> <br />
             
                          <label for="password">Password:</label>
-                         <input id="password" type="password" name="password" /> <br />
+                         <input id="password" type="password" name="password" /> <span class="password"></span> <br />
                
             <input type="submit" value="Submit" />
                         
