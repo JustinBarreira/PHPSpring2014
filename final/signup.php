@@ -10,13 +10,14 @@
         
         <?php 
         
-        $signup = new Signup();  
+        $users = new Users();  
          
          if ( Util::isPostRequest() ) {
              
               $UsersModel = new UsersModel(filter_input_array(INPUT_POST));
               
-              if ( $signup->create($UsersModel) ) {
+              if ( $users->create($UsersModel) ) {
+                  $_SESSION['login'] = true;
                   Util::redirect('admin');
               } else {
                    echo '<p>User could not be created</p>';

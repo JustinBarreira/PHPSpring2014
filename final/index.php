@@ -17,7 +17,7 @@
             if ( Util::isPostRequest() ) {
                 $checkcode = new Passcode();
 
-                if ( Validator::isValidLogin($checkcode) ) {
+                if ( $checkcode->isValidLogin($checkcode) ) {
                     $_SESSION['login'] = true;
                     Util::redirect('admin');                   
                 } else {                    

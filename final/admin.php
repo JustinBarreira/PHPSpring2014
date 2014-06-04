@@ -14,10 +14,9 @@ and open the template in the editor.
                  
         <?php 
             
-            if(isset(Util::isPostRequest())) {
-               
+            if ( !isset($_SESSION['login']) || !$_SESSION['login'] ) {               
                 session_destroy();
-                header('Location: login.php'); //Dont forget to redirect
+                header('Location: index.php');
                 exit;
             }
 

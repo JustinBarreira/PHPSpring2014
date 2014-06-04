@@ -42,31 +42,5 @@ class Validator extends DB {
     public static function commentIsValid($comment) {
         return ( is_string($comment) && !empty($comment) && strlen($comment) <= 150 );    
        
-    }   
-
-    /*
-    * A public function to check if the passcode is valid
-    * 
-    * @return boolean
-    */
-    public function isValidLogin(Passcode $loginModel ){
-        // shortcut for if else checks to see if true (else) : false
-        $username = $loginModel->getUsername();
-        $password = $loginModel->getPassword();
-        $isValid = false;
-        
-            if ( null !== $this->getDB() ) {
-
-                $dbs = $this->getDB()->prepare('select username, password from signup where username = :username AND password = :password limit 1');
-                $dbs->bindParam(':username', $username, PDO::PARAM_STR);
-                $dbs->bindParam(':password', $password, PDO::PARAM_STR);
-
-                if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-                    $isValid = true;
-                } 
-
-             }
-         
-         return $isValid;
     }
 }

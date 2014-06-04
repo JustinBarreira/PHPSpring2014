@@ -29,10 +29,9 @@
               } else {
                    echo '<p>Address Could not update</p>';
               }
-          }
+          }         
          
-         
-         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+         $id = filter_input(INPUT_GET , 'id', FILTER_VALIDATE_INT);
          
          $addressResult = $address->read($id);
           //print_r($addressResult);

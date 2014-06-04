@@ -21,7 +21,7 @@ class DB {
         return $this->db;        
     }
     
-     public function closeDB() {        
+    public function closeDB() {        
         $this->db = null;        
     }
         
