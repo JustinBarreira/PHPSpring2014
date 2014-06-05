@@ -1,3 +1,4 @@
+<?php include 'dependency.php'; ?>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -12,14 +13,38 @@ and open the template in the editor.
     </head>
     <body>
                  
-        <?php 
-            
-            if ( !isset($_SESSION['login']) || !$_SESSION['login'] ) {               
+        <?php
+        // put your code here
+        
+        if ( $_SESSION['userID'] <= 0 ) {               
                 session_destroy();
-                header('Location: index.php');
+                header('Location: login.php');
                 exit;
             }
-
+         
+        $users = new Users();
+        
+         
+         if ( Util::isPostRequest() ) {
+             
+              $aboutPageModel = new AboutPageModel(filter_input_array(INPUT_POST));
+              $aboutPageModel->user_id = $_SESSION['userID'];
+              
+              if ( $users->update($aboutPageModel) ) {
+                  
+                  
+              } else {
+                  
+                   echo '<p>Page could not update</p>';
+              }
+          }         
+         $aboutPage = $users->read($_SESSION['userID']);
+         //$id = filter_input(INPUT_GET , 'id', FILTER_VALIDATE_INT);
+                   
+         //if ( !is_array($aboutPageModel) || count($aboutPageModel) <= 0 ) {
+             //Util::redirect('viewaddress');
+         //}            
+            
         ?>
         
         <h1 id="logo"><span>&#x2728;</span>SaaS Project</h1>
@@ -31,24 +56,31 @@ and open the template in the editor.
         <legend> Edit your Page</legend>
                 
         
-        <div id="preview"> <a href="index.php?page=test" target="popup">View Page</a></div>
+        <div id="preview"> <a href="index.php?page=test" target="popup">View Page</a></div><span class="update"></span>
         
          <form name="mainform" action="#" method="post">
             
-             <label> Title:</label> <input type="text" name="title" value="Test title page" /><br />            
-             <label> Theme:</label> <select name="theme">
-                <option value="theme1" >Theme 1</option>
-                <option value="theme2" selected="selected">Theme 2</option>
-                <option value="theme3" >Theme 3</option>
+             <label> Title:</label> <input id="title" type="text" name="title" value="<?php echo $aboutPage['title']; ?>" /><br />            
+             <label> Theme:</label> <select id="theme" name="theme">
+                 <?php
+                 
+                 $theme = array( 'Theme 1', 'Theme 2', 'Theme 3');
+                 
+                    if (count($theme) ) {
+                        foreach ($theme as $value) {
+                            echo '<option>',$value,'</option>';
+                        }
+                    }
+                 
+                 ?>
                  </select>
             <br />
             
-            <label> Address:</label> <input type="text" name="address" value="123 test st, providence RI, 02864" /><br /> 
-            <label> Phone:</label> <input type="text" name="phone" value="555-666-7777" /><br /> 
-            <label> Email:</label> <input type="text" name="email" value="test@test.com" /><br /> 
+            <label> Address:</label> <input id="address" type="text" name="address" value="<?php echo $aboutPage['address']; ?>" /><br /> 
+            <label> Phone:</label> <input id="phone" type="text" name="phone" value="<?php echo $aboutPage['phone']; ?>" /><br /> 
+            <label> Email:</label> <input id="email" type="text" name="email" value="<?php echo $aboutPage['email']; ?>" /><br /> 
             <label> About:</label><br />
-            <textarea name="about" cols="50" rows="10">this is a test to make sure everything works
-</textarea><br /> 
+            <textarea id="content" name="content" cols="50" rows="10" value="<?php echo $aboutPage['content']; ?>"></textarea><br /> 
             
             <input type="submit" value="Submit" />
             

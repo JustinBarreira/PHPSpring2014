@@ -1,6 +1,6 @@
 <?php
 
-class UsersModel {
+class WebsiteModel {
     //put your code here
     
     public $userid;
@@ -9,8 +9,7 @@ class UsersModel {
     public $password;
     public $active;
             
-    function __construct($paramArr) {    
-        $this->map($paramArr);
+    function __construct() { 
     }        
     
     /**

@@ -53,7 +53,7 @@ class Util {
     
     
     public static function confirmAccess() {
-        if ( !isset($_SESSION['validcode']) || !$_SESSION['validcode'] ) {
+        if ( !isset($_SESSION['userID']) || !$_SESSION['userID'] ) {
            Util::redirect('index');
         }
     }

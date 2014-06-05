@@ -1,14 +1,14 @@
 <?php include 'dependency.php'; ?>
 <?php
 
-$websiteRequest = new UsersModel();
+$websiteRequest = new WebsiteModel();
 $websiteRequest->setWebsite(filter_input(INPUT_POST, 'website'));
         
 $checkWebsite = array( "taken" => 'Available', "website" => $websiteRequest->getWebsite() );
 
-$signup = new Signup();
+$users = new Users();
 
-if ( $signup->websiteTaken($websiteRequest) )
+if ( $users->websiteTaken($websiteRequest) )
 {
     $checkWebsite["taken"] = 'Unavailable';
 }

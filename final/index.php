@@ -3,52 +3,44 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>SaaS Project - Login</title>
-         <link rel="stylesheet" type="text/css" href="css/admin.css" />
+        <title>Justin</title>
+        <link rel="stylesheet" type="text/css" href="css/theme2.css" />
     </head>
     <body>
         
-        <?php
-        // put your code here
-            $msg = '';
-            if ( ! isset($_SESSION['login']) ) {
-                $_SESSION['login'] = false;
-            }
-            if ( Util::isPostRequest() ) {
-                $checkcode = new Passcode();
-
-                if ( $checkcode->isValidLogin($checkcode) ) {
-                    $_SESSION['login'] = true;
-                    Util::redirect('admin');                   
-                } else {                    
-                    $msg = 'Password is not valid.';
-                }
-            }
-
-            if ( !empty($msg)) {
-                echo '<p>', $msg, '</p>';
-            }
-        ?>
-                
-        <h1 id="logo"><span>&#x2728;</span>SaaS Project</h1>
+        <!-- http://www.fileformat.info/info/unicode/char/270d/index.htm -->
+        <div id="icon">&#x270d;</div>
         
-        <fieldset>
-            <legend>Login</legend>
-            <p> Not a member, <a href="signup.php">Signup</a></p>
+        <h1><span>What we are all</span>
+            About</h1>
+        
+        <!-- http://html-ipsum.com/ -->
+        <div id='about'>  
+            <h2>Welcome to our website</h2> 
+<p><a href="login.php">Edit</a></p>
+            gjsbnlfnsdjnsknslvsd<br />
+jdvnsjv<br />
+<br />
+dvjnsdljkvnsd<br />
+jdvsdlvndkv<br />
+<br />
+kdvnsluodkvnsdmkvm  
+        </div>
+        
+        <div id="contact">
+           
+            <div id="email"> 
+                 <div class="iconHeader">&#x2709;</div>
+                jb@email.com            </div>
+            <div id="phone"> 
+                 <div class="iconHeader">&#x2706;</div>
+                4523905324 
+            </div>
+             <div id="address">
+                <div class="iconHeader">&#x270e;</div>
+                123 fake st            </div>
+        </div>
+        
 
-                        
-            <form name="mainform" action="#" method="post">
-
-                <label>Email:</label> <input type="text" name="email" /> <br />
-                <label>Password:</label> <input type="password" name="password" /> <br />
-
-                <input type="submit" value="Submit" />
-
-            </form>
-        </fieldset>
     </body>
 </html>
-
-<!-- Hosting24 Analytics Code -->
-<script type="text/javascript" src="http://stats.hosting24.com/count.php"></script>
-<!-- End Of Analytics Code -->

@@ -6,9 +6,9 @@ class Users extends DB {
         $this->setDb();
     }
     
-    public function websiteTaken(UsersModel $usersModel) {
+    public function websiteTaken(WebsiteModel $websiteModel) {
         
-        $website = $usersModel->getWebsite();
+        $website = $websiteModel->getWebsite();
         $isTaken = false;
         
             if ( null !== $this->getDB() ) {
@@ -25,6 +25,8 @@ class Users extends DB {
          return $isTaken;
     }
     
+        
+    
     /**
     * A public method to create a new entry into the users
     * database.
@@ -33,28 +35,56 @@ class Users extends DB {
     *
     * @return boolean
     */  
-    public function create($UsersModel) {
-        $result = false;
-        
+    public function createUser(UsersModel $UsersModel) {
+        $result = 0;
+        $active = 1;
         //INSERT INTO USERS VALUES
          if ( null !== $this->getDB() && $UsersModel instanceof UsersModel) {
             $dbs = $this->getDB()->prepare('insert into users set website = :website, email = :email, password = :password');
             $dbs->bindParam(':website', $UsersModel->website, PDO::PARAM_STR);
             $dbs->bindParam(':email', $UsersModel->email, PDO::PARAM_STR);
             $dbs->bindParam(':password', $UsersModel->password, PDO::PARAM_STR);
+                        
+            if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
+                $result = intval($this->getDB()->lastInsertId());
+            }        
+        
+         }   
+        
+        return $result;
+    }
+    
+    /**
+    * A public method to create a new entry into the about_page
+    * database.
+    *
+    * @param int $id
+    *
+    * @return boolean
+    */  
+    public function createAboutPage( $id ) {
+        $result = false;
+        $title = 'Title';
+        $theme = 'Theme 1';
+        $address = 'Address';
+        $phone = '555-5555';
+        $email = 'Email';
+        $content = 'Add your content';
+        
+        //INSERT INTO ABOUT_PAGE VALUES
+         if ( null !== $this->getDB() ) {
             
-            $dbs2 = $this->getDB()->prepare('insert into about_page set user_id = :user_id, title = Title, theme = Theme 1, address = Address, phone = 555-867-5309, email = :email, content = About, active = :active');
-            $dbs2->bindParam(':user_id', $UsersModel->userid, PDO::PARAM_INT);
-            $dbs2->bindParam("Title", $UsersModel->title, PDO::PARAM_STR);
-            $dbs2->bindParam("Theme 1", $UsersModel->theme, PDO::PARAM_STR);
-            $dbs2->bindParam("Address", $UsersModel->address, PDO::PARAM_STR);
-            $dbs2->bindParam("555-867-5309", $UsersModel->phone, PDO::PARAM_STR);
-            $dbs2->bindParam(':email', $UsersModel->email, PDO::PARAM_STR);
-            $dbs2->bindParam("About", $UsersModel->content, PDO::PARAM_STR);
-            $dbs2->bindParam(':active', $UsersModel->active, PDO::PARAM_INT);
+            $dbs = $this->getDB()->prepare('insert into about_page set user_id = :user_id, title = :title, theme = :theme, address = :address, phone = :phone, email = :email, content = :content');
+            $dbs->bindParam(':user_id', $_SESSION['userID'], PDO::PARAM_INT);
+            $dbs->bindParam(':title', $title, PDO::PARAM_STR);
+            $dbs->bindParam(':theme', $theme, PDO::PARAM_STR);
+            $dbs->bindParam(':address', $address, PDO::PARAM_STR);
+            $dbs->bindParam(':phone', $phone, PDO::PARAM_STR);
+            $dbs->bindParam(':email', $email, PDO::PARAM_STR);
+            $dbs->bindParam(':content', $content, PDO::PARAM_STR);
             
                         
-            if ( $dbs->execute() && $dbs->rowCount() > 0 && $dbs2->execute() && $dbs2->rowCount() > 0 ) {
+            if ( $dbs->execute() && $dbs->rowCount()) {
                 $result = true;
             }        
         
@@ -63,24 +93,31 @@ class Users extends DB {
         return $result;
     }
     
-    public function save( SignupModel $dataModel) {
+    public function update( $aboutPageModel ) {
         $result = false;
          
-        $email = $dataModel->getEmail();
-        $username = $dataModel->getUsername();
-        $password = sha1($dataModel->getPassword());
+        //$about_page_id = $aboutPageModel->getAbout_page_id();
+        //$user_id = $aboutPageModel->getUser_id();
+        //$title = $aboutPageModel->getTitle();
+        //$theme = $aboutPageModel->getTheme();
+        //$address = $aboutPageModel->getAddress();
+        //$phone = $aboutPageModel->getPhone();
+        //$email = $aboutPageModel->getEmail();
+        //$content = $aboutPageModel->getContent();
+        //$active = $aboutPageModel->getActive();
                
-         if ( null !== $this->getDB() ) {
-            $dbs = $this->getDB()->prepare('insert into signup set username = :username, email = :email, password = :password');
-            $dbs->bindParam(':username', $username, PDO::PARAM_STR);
-            $dbs->bindParam(':email', $email, PDO::PARAM_STR);
-            $dbs->bindParam(':password', $password, PDO::PARAM_STR);
+         if ( null !== $this->getDB() && $aboutPageModel instanceof AboutPageModel ) {
+            $dbs = $this->getDB()->prepare('update about_page set title = :title, theme = :theme, address = :address, phone = :phone, email = :email, content = :content where user_id = :user_id');
+            $dbs->bindParam(':user_id', $aboutPageModel->user_id, PDO::PARAM_INT);
+            $dbs->bindParam(':title', $aboutPageModel->title, PDO::PARAM_STR);
+            $dbs->bindParam(':theme', $aboutPageModel->theme, PDO::PARAM_STR);
+            $dbs->bindParam(':address', $aboutPageModel->address, PDO::PARAM_STR);
+            $dbs->bindParam(':phone', $aboutPageModel->phone, PDO::PARAM_STR);
+            $dbs->bindParam(':email', $aboutPageModel->email, PDO::PARAM_STR);
+            $dbs->bindParam(':content', $aboutPageModel->content, PDO::PARAM_STR);
             
             if ( $dbs->execute() && $dbs->rowCount() > 0 ) {
-                $result = intval($this->getDB()->lastInsertId());
-            } else {
-                $error = $dbs->errorInfo();
-                error_log($error[2], 3, "logs/errors.log");
+                $result = true;
             }
         
          }   
@@ -114,7 +151,7 @@ class Users extends DB {
            $results = array();
            
             if ( null !== $this->getDB() ) {
-            $dbs = $this->getDB()->prepare('select * from addressbook where id = :id limit 1');
+            $dbs = $this->getDB()->prepare('select * from about_page where user_id = :id limit 1');
             $dbs->bindParam(':id', $id, PDO::PARAM_INT);
             
             if ( $dbs->execute() && $dbs->rowCount() > 0 ) {

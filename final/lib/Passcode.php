@@ -26,7 +26,7 @@ class Passcode extends DB{
      * A public function to set the passcode
      */
     public function setPassword($password) {
-        $this->passcode = $password;
+        $this->password = $password;
     }
     
     /*
@@ -49,22 +49,22 @@ class Passcode extends DB{
     * @return boolean
     */
     public function isValidLogin(Passcode $loginModel ){
-        //$userid = 0;
-        $username = $loginModel->getEmail();
-        $password = $loginModel->getPassword();
+        
         $isValid = false;
         
             if ( null !== $this->getDB() && $loginModel instanceof Passcode) {
 
-                $dbs = $this->getDB()->prepare('select user_id, email, password from users where email = :email');
+                $dbs = $this->getDB()->prepare('select * from users where email = :email AND password = :password limit 1');
                 //$dbs->bindParam(':userid', $userid, PDO::PARAM_INT);
-                $dbs->bindParam(':username', $username, PDO::PARAM_STR);
-                $dbs->bindParam(':password', $password, PDO::PARAM_STR);
+                $dbs->bindParam(':email', $loginModel->getEmail(), PDO::PARAM_STR);
+                $dbs->bindParam(':password', $loginModel->getPassword(), PDO::PARAM_STR);
 
                 if ( $dbs->execute() && $dbs->rowCount() > 0 ) {                    
+                    $result = $dbs->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['userID'] = $result['user_id'];
                     $isValid = true;
                 } 
-                    var_dump($dbs);
+                    var_dump($_SESSION['userID']);
              }
          
          return $isValid;

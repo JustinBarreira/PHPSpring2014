@@ -27,7 +27,7 @@ class Signup extends DB {
                
          if ( null !== $this->getDB() ) {
             $dbs = $this->getDB()->prepare('insert into signup set username = :username, email = :email, password = :password');
-           $dbs->bindParam(':username', $username, PDO::PARAM_STR);
+            $dbs->bindParam(':username', $username, PDO::PARAM_STR);
             $dbs->bindParam(':email', $email, PDO::PARAM_STR);
             $dbs->bindParam(':password', $password, PDO::PARAM_STR);
             

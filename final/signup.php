@@ -14,9 +14,11 @@
          
          if ( Util::isPostRequest() ) {
              
-              $UsersModel = new UsersModel(filter_input_array(INPUT_POST));
+              $usersModel = new UsersModel(filter_input_array(INPUT_POST));
+              $_SESSION['userID'] = $users->createUser($usersModel);
               
-              if ( $users->create($UsersModel) ) {
+              if ( null !== $_SESSION['userID'] ) {  
+                  $users->createAboutPage($_SESSION['userID']);
                   $_SESSION['login'] = true;
                   Util::redirect('admin');
               } else {
@@ -32,11 +34,11 @@
         
         <fieldset>
             <legend>Signup</legend>
-        <p> Already a member, <a href="index.php">Login</a></p>
+        <p> Already a member, <a href="login.php">Login</a></p>
          <form name="mainform" action="#" method="post">            
              
                          <label for="website">Web Site:</label>
-                         <input id="website" type="text" name="website" maxlength="30" value="" /> <span class="websitetaken">Span</span> <br />             
+                         <input id="website" type="text" name="website" maxlength="30" value="" /> <span class="websitetaken"></span> <br />             
             
                          <label for="email">Email:</label>
                          <input id="email" type="text" name="email" /> <span class="email"></span> <br />
