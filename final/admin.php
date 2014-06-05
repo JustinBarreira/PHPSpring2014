@@ -22,6 +22,9 @@ and open the template in the editor.
                 exit;
             }
          
+            logout::checkLogout();
+            logout::confirmAccess();
+            
         $users = new Users();
         
          
