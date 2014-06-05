@@ -25,8 +25,8 @@
         
         <div id='about'>  
             <h2>Welcome to our website</h2> 
-            <p><a href="login.php">Edit</a></p>
-              
+            <p><a href="admin.php">Edit</a></p>
+            <?php echo '<p>',$aboutPage['content'], '</p>' ?>
         </div>
         
         <div id="contact">
